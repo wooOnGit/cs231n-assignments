@@ -73,7 +73,8 @@ class KNearestNeighbor(object):
         # training point, and store the result in dists[i, j]. You should   #
         # not use a loop over dimension.                                    #
         #####################################################################
-        pass
+            dists[i][j] = np.sqrt( np.sum( (self.X_train[j] - X[i]) **2) )        
+        
         #####################################################################
         #                       END OF YOUR CODE                            #
         #####################################################################
@@ -155,6 +156,12 @@ class KNearestNeighbor(object):
       # neighbors. Store these labels in closest_y.                           #
       # Hint: Look up the function numpy.argsort.                             #
       #########################################################################
+        
+      # get the index of dist metrix for the X_test[i]
+      dist_index = np.argsort(dists[i])
+
+      # get the k smallest index for the X_test[i]
+      k_smallest_index = dist_index[:k]
       pass
       #########################################################################
       # TODO:                                                                 #
@@ -163,7 +170,11 @@ class KNearestNeighbor(object):
       # Store this label in y_pred[i]. Break ties by choosing the smaller     #
       # label.                                                                #
       #########################################################################
-      pass
+    
+      # get the label based on the index, vote the result
+      pred_labels = y_train[k_smallest_index]
+      voted_labels = np.bincount(pred_labels).argmax()
+      y_pred[i] = voted_labels
       #########################################################################
       #                           END OF YOUR CODE                            # 
       #########################################################################
