@@ -172,7 +172,7 @@ class KNearestNeighbor(object):
       #########################################################################
     
       # get the label based on the index, vote the result
-      pred_labels = y_train[k_smallest_index]
+      pred_labels = self.y_train[k_smallest_index]
       voted_labels = np.bincount(pred_labels).argmax()
       y_pred[i] = voted_labels
       #########################################################################
